@@ -1,4 +1,4 @@
-package pl.spring.demo.web.jetty;
+ package pl.spring.demo.web.jetty;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;

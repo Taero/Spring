@@ -1,3 +1,23 @@
 .sample {
     color: red;
 }
+
+table {
+      background-color: #F9EAFF;
+      border-style: solid;  
+}
+
+.table_header {
+      font-weight: bold;
+	  font-style: italic;
+	  font-size: larger;
+      color: green;
+}
+
+tbody tr td {
+        border:4px dotted;
+        text-align:center;
+        padding:5px;
+        padding-left:10px;
+        padding-right:10px;
+}
