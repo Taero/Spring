@@ -2,10 +2,12 @@
 <html xmlns:th="http://thymeleaf.org">
 <head lang="en">
     <meta charset="UTF-8" />
-    <title>Pierwsza strona</title>
+    <title>Startoteka</title>
     <link rel="stylesheet" th:href="@{/static/application.css}" href="/static/application.css" />
 </head>
 <body>
     <p class="sample" th:inline="text">[[${book.title}]]</p>
+    <br/>
+    <p>Kliknij <a th:href="@{|/books|}">tutaj</a>, aby przejść do wszystkich książek.</p>
 </body>
 </html>

@@ -1,14 +1,17 @@
 package pl.spring.demo.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import pl.spring.demo.service.BookService;
-import pl.spring.demo.to.BookTo;
-
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import pl.spring.demo.service.BookService;
+import pl.spring.demo.to.BookTo;
 
 @Controller
 public class BookController {
@@ -22,5 +25,17 @@ public class BookController {
         return "bookList";
     }
     
+    @RequestMapping(value = "/deleteBook/{id}", method = RequestMethod.GET)
+	public String deleteBook(@PathVariable(value = "id") Long id, Map<String, Object> params) {
+    	BookTo deletedBook = bookService.removeBookAndGetRemoved(id);
+    	if (deletedBook == null) {
+    		deletedBook = new BookTo(id, "Nie znaleziono książki", "");
+    		return "bookNotDeleted";
+    	} else {
+    		params.put("deletedBook", deletedBook);
+    		return "bookDeleted";
+    	}
+    }
     
+//return "redirect:/books";    
 }
