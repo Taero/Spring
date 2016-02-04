@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head lang="en">
+<meta charset="UTF-8" />
+<title>Informacja o usuniętej pozycji</title>
+<link rel="stylesheet" th:href="@{/static/application.css}"
+	href="/static/application.css" />
+</head>
+<body>
+	<p>
+	<h1>Fanfary</h1>
+	</p>
+		<div style="font-size:20px">Książka o tytule "<span style="color: green; font-weight: bold" th:text="${deletedBook.title}">title</span>" została usunięta.</div>
+<br/>
+<br/>
+	<p>
+		Kliknij <a th:href="@{|/books|}">tutaj</a>, aby przejść do wszystkich książek.
+	</p>
+</body>
+</html>
