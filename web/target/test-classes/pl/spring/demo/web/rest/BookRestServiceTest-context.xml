@@ -11,4 +11,10 @@
         <constructor-arg value="pl.spring.demo.service.BookService"/>
     </bean>
 
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    </bean>
+
 </beans>

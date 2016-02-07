@@ -20,9 +20,11 @@
 		<tr th:each="book:${books}">
 			<td th:text="${book.id}">id</td>
 			<td><p th:text="${book.title}">title</p> <a
-				th:href="@{|/deleteBook/${book.id}|}"><span>usuń pozycję</span></a></td>
+				th:href="@{|/delete/${book.id}|}"><span>usuń pozycję</span></a></td>
 			<td th:text="${book.authors}">authors</td>
 		</tr>
 	</table>
+	<p><a th:href="@{|/books|}">Odśwież listę</a></p>
+	
 </body>
 </html>

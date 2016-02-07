@@ -62,4 +62,28 @@ public class BookServiceImpl implements BookService {
 		}		
 		return null;
 	}
+
+	@Override
+    @Transactional(readOnly = false)
+	public BookTo addBook(BookTo book) {
+		if (book.getAuthors().length() > 0 && book.getTitle().length() > 0 && book.getId() != null) {
+			return saveBook(book);
+		}
+		return null;
+	}
+
+	@Override
+    @Transactional(readOnly = false)
+	public BookTo changeBook(BookTo book) {
+		if (book.getAuthors().length() > 0 && book.getTitle().length() > 0 && book.getId() != null) {
+			BookTo bookToChange = BookMapper.map(bookRepository.findOne(book.getId()));
+			if (bookToChange != null) {
+				bookToChange.setAuthors(book.getAuthors());
+				bookToChange.setTitle(book.getTitle());
+				return saveBook(bookToChange);
+			}
+		}
+		return null;
+	}
+	
 }

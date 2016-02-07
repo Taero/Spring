@@ -1,5 +1,13 @@
 package pl.spring.demo.web.rest;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.io.File;
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,24 +21,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
 import pl.spring.demo.service.BookService;
 import pl.spring.demo.to.BookTo;
 import pl.spring.demo.web.utils.FileUtils;
-
-import java.io.File;
-import java.util.Arrays;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 @WebAppConfiguration
 public class BookRestServiceTest {
 
+	
     @Autowired
     private BookService bookService;
     @Autowired
@@ -85,4 +86,28 @@ public class BookRestServiceTest {
         // then
         response.andExpect(status().isOk());
     }
+    
+    @Test
+    public void testShouldRemoveBook() throws Exception {
+        // given
+    	Long id = 1L;
+    	BookTo book = new BookTo(id, "Pozycja usunięta", "Jan Fasolka");
+        Mockito.when(bookService.removeBookAndGetRemoved(id)).thenReturn(book);
+
+        // when
+        ResultActions response = this.mockMvc.perform(post("/delete/{id}", id));
+        // then
+        response.andExpect(status().isOk());
+//        .andExpect(view().name("bookDeleted"));
+    }
+    
+/*    @Test
+    public void testShouldNotRemoveBook() throws Exception {
+        // given
+    	Long id = 18L;
+        // when
+        ResultActions response = this.mockMvc.perform(post("/delete/{id}", id));
+        // then
+        response.andExpect(status().isOk());
+    }*/
 }

@@ -25,7 +25,7 @@ public class BookController {
         return "bookList";
     }
     
-    @RequestMapping(value = "/deleteBook/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}")
 	public String deleteBook(@PathVariable(value = "id") Long id, Map<String, Object> params) {
     	BookTo deletedBook = bookService.removeBookAndGetRemoved(id);
     	if (deletedBook == null) {
@@ -37,5 +37,16 @@ public class BookController {
     	}
     }
     
-//return "redirect:/books";    
+    @RequestMapping(value = "/add")
+ 	public String addBook(@RequestParam("id") Long id, @RequestParam("title") String title, @RequestParam("author") String author, Map<String, Object> params) {
+    	bookService.addBook(new BookTo(id, title, author));
+//    	http://localhost:9721/workshop/add?id=10&title=W pustyni i w puszczy&author=Henryk Sienkiewicz
+     	return "redirect:/books";
+     }
+
+    @RequestMapping(value = "/change")
+ 	public String changeBook(@RequestParam("id") Long id, @RequestParam("title") String title, @RequestParam("author") String author, Map<String, Object> params) {
+    	bookService.changeBook(new BookTo(id, title, author));
+     	return "redirect:/books";
+     }
 }
