@@ -25,7 +25,7 @@ public class BookController {
         return "bookList";
     }
     
-    @RequestMapping(value = "/delete/{id}")
+    @RequestMapping(value = "/delete/{id}" , method = RequestMethod.GET)
 	public String deleteBook(@PathVariable(value = "id") Long id, Map<String, Object> params) {
     	BookTo deletedBook = bookService.removeBookAndGetRemoved(id);
     	if (deletedBook == null) {

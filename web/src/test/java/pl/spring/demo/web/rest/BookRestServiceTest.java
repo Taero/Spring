@@ -95,7 +95,7 @@ public class BookRestServiceTest {
         Mockito.when(bookService.removeBookAndGetRemoved(id)).thenReturn(book);
 
         // when
-        ResultActions response = this.mockMvc.perform(post("/delete/{id}", id));
+        ResultActions response = this.mockMvc.perform(get("/delete/{id}", id));
         // then
         response.andExpect(status().isOk());
 //        .andExpect(view().name("bookDeleted"));
